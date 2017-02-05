@@ -5,8 +5,8 @@ var app = angular.module("dmsApp");
 
 app.factory("registrationService", function ($http) {
     return {
-        login: function (user) {
-            $http.post("http://localhost:8080/user/login", user)
+        login: function (loginInfo) {
+            $http.post("http://localhost:8080/user/login", loginInfo)
                 .then(function ($data) {
                         console.log($data);
                     }, function () {
@@ -14,8 +14,8 @@ app.factory("registrationService", function ($http) {
                     }
                 );
         },
-        signup: function (user) {
-            $http.post("http://localhost:8080/user/signup", user)
+        signup: function (signupInfo) {
+            $http.post("http://localhost:8080/user/signup", signupInfo)
                 .then(function ($data) {
                         console.log($data);
                     }, function () {
