@@ -1,4 +1,4 @@
-<div class="form">
+<div ng-hide="successfullySignedUp" class="form">
 
     <ul class="tab-group">
         <li class="tab active"><a href="#signup">Sign Up</a></li>
@@ -79,4 +79,58 @@
     </div><!-- tab-content -->
 
 </div> <!-- /form -->
+
+<div class="form">
+
+    <div ng-show="successfullySignedUp" id="company_register">
+        <h1>Create company and manage it's documentation now</h1>
+
+        <form>
+
+            <div class="field-wrap">
+                <label>
+                    Company Name<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" ng-model="companyInfo.companyName"/>
+            </div>
+
+            <div class="field-wrap">
+                <label>
+                    Office Location City<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationCity"/>
+            </div>
+
+            <div class="field-wrap">
+                <label>
+                    Office Location Street<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationStreet"/>
+            </div>
+
+            <div class="field-wrap">
+                <label>
+                    Office Location Street Number<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationStreetNumber"/>
+            </div>
+
+            <div class="field-wrap">
+                <label>
+                    VAT<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" ng-model="companyInfo.vat"/>
+            </div>
+
+            <button ng-click="handleCompanyRegistration(companyInfo)" class="button button-block">
+                Create
+            </button>
+
+        </form>
+
+    </div>
+
+
+</div> <!-- /form -->
+
 <script src="../js/index.js"></script>
