@@ -3,7 +3,9 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("registrationFormController", function ($scope, registrationService, $location) {
+app.controller("registrationFormController", function ($scope, registrationService, $location, cssInjector) {
+    cssInjector.add("../css/style.css");
+
     $scope.user = undefined;
     $scope.company = undefined;
     $scope.successfullySignedUp = false;
