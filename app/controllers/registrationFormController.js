@@ -3,11 +3,11 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("registrationFormController", function ($scope, registrationService) {
+app.controller("registrationFormController", function ($scope, registrationService, $location) {
     $scope.user = undefined;
     $scope.company = undefined;
     $scope.successfullySignedUp = false;
-    
+
     $scope.handleLoginRequest = function (loginInfo) {
         registrationService.login(loginInfo)
             .success(function ($data) {
@@ -40,7 +40,8 @@ app.controller("registrationFormController", function ($scope, registrationServi
             .success(function ($data) {
                 $scope.company = $data;
                 $scope.user.company = $scope.company;
-                console.log($scope.user);
+                console.log($scope.company);
+                $location.path("/dashboard");
             })
             .error(function ($data) {
                 console.log("Error occured while creating company: " + $data);

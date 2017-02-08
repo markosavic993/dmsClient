@@ -41,8 +41,9 @@
                     <input type="password" required autocomplete="off" ng-model="signupInfo.password"/>
                 </div>
 
-                <button ng-click="handleSignupRequest(signupInfo)" class="button button-block" >
-                Get Started</button>
+                <button ng-click="handleSignupRequest(signupInfo)" class="button button-block">
+                    Get Started
+                </button>
 
             </form>
 
@@ -69,8 +70,9 @@
 
                 <p class="forgot"><a href="#">Forgot Password?</a></p>
 
-                <button ng-click="handleLoginRequest(loginInfo)" class="button button-block" >
-                Log In</button>
+                <button ng-click="handleLoginRequest(loginInfo)" class="button button-block">
+                    Log In
+                </button>
 
             </form>
 
@@ -80,9 +82,9 @@
 
 </div> <!-- /form -->
 
-<div class="form">
+<div ng-show="successfullySignedUp" class="form">
 
-    <div ng-show="successfullySignedUp" id="company_register">
+    <div id="company_register">
         <h1>Create company and manage it's documentation now</h1>
 
         <form>
@@ -125,6 +127,7 @@
             <button ng-click="handleCompanyRegistration(companyInfo)" class="button button-block">
                 Create
             </button>
+
 
         </form>
 
