@@ -3,6 +3,6 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("menuController", function ($scope) {
-
+app.controller("menuController", function () {
+    var vm = this;
 });

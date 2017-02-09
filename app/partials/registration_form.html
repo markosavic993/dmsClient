@@ -1,139 +1,139 @@
-<div ng-hide="successfullySignedUp" class="form">
+<div ng-controller="registrationFormController as vm">
+    <div ng-hide="vm.successfullySignedUp" class="form">
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Sign Up</a></li>
+            <li class="tab"><a href="#login">Log In</a></li>
+        </ul>
 
-    <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
-    </ul>
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Sign Up for Free</h1>
 
-    <div class="tab-content">
-        <div id="signup">
-            <h1>Sign Up for Free</h1>
+                <form>
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                First Name<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" ng-model="signupInfo.firstName"/>
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Last Name<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" ng-model="signupInfo.lastName"/>
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Choose Username<span class="req">*</span>
+                        </label>
+                        <input type="text" required autocomplete="off" ng-model="signupInfo.username"/>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" ng-model="signupInfo.password"/>
+                    </div>
+
+                    <button ng-click="vm.handleSignupRequest(signupInfo)" class="button button-block">
+                        Get Started
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div id="login">
+                <h1>Welcome Back!</h1>
+
+                <form>
+
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        <input type="text" required autocomplete="off" ng-model="loginInfo.username"/>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" ng-model="loginInfo.password"/>
+                    </div>
+
+                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                    <button ng-click="vm.handleLoginRequest(loginInfo)" class="button button-block">
+                        Log In
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div><!-- tab-content -->
+
+    </div> <!-- /form -->
+
+    <div ng-show="vm.successfullySignedUp" class="form">
+
+        <div id="company_register">
+            <h1>Create company and manage it's documentation now</h1>
 
             <form>
 
-                <div class="top-row">
-                    <div class="field-wrap">
-                        <label>
-                            First Name<span class="req">*</span>
-                        </label>
-                        <input type="text" required autocomplete="off" ng-model="signupInfo.firstName"/>
-                    </div>
-
-                    <div class="field-wrap">
-                        <label>
-                            Last Name<span class="req">*</span>
-                        </label>
-                        <input type="text" required autocomplete="off" ng-model="signupInfo.lastName"/>
-                    </div>
+                <div class="field-wrap">
+                    <label>
+                        Company Name<span class="req">*</span>
+                    </label>
+                    <input type="text" required autocomplete="off" ng-model="companyInfo.companyName"/>
                 </div>
 
                 <div class="field-wrap">
                     <label>
-                        Choose Username<span class="req">*</span>
+                        Office Location City<span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" ng-model="signupInfo.username"/>
+                    <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationCity"/>
                 </div>
 
                 <div class="field-wrap">
                     <label>
-                        Set A Password<span class="req">*</span>
+                        Office Location Street<span class="req">*</span>
                     </label>
-                    <input type="password" required autocomplete="off" ng-model="signupInfo.password"/>
+                    <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationStreet"/>
                 </div>
 
-                <button ng-click="handleSignupRequest(signupInfo)" class="button button-block">
-                    Get Started
+                <div class="field-wrap">
+                    <label>
+                        Office Location Street Number<span class="req">*</span>
+                    </label>
+                    <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationStreetNumber"/>
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        VAT<span class="req">*</span>
+                    </label>
+                    <input type="text" required autocomplete="off" ng-model="companyInfo.vat"/>
+                </div>
+
+                <button ng-click="vm.handleCompanyRegistration(companyInfo)" class="button button-block">
+                    Create
                 </button>
+
 
             </form>
 
         </div>
 
-        <div id="login">
-            <h1>Welcome Back!</h1>
 
-            <form>
-
-                <div class="field-wrap">
-                    <label>
-                        Username<span class="req">*</span>
-                    </label>
-                    <input type="text" required autocomplete="off" ng-model="loginInfo.username"/>
-                </div>
-
-                <div class="field-wrap">
-                    <label>
-                        Password<span class="req">*</span>
-                    </label>
-                    <input type="password" required autocomplete="off" ng-model="loginInfo.password"/>
-                </div>
-
-                <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-                <button ng-click="handleLoginRequest(loginInfo)" class="button button-block">
-                    Log In
-                </button>
-
-            </form>
-
-        </div>
-
-    </div><!-- tab-content -->
-
-</div> <!-- /form -->
-
-<div ng-show="successfullySignedUp" class="form">
-
-    <div id="company_register">
-        <h1>Create company and manage it's documentation now</h1>
-
-        <form>
-
-            <div class="field-wrap">
-                <label>
-                    Company Name<span class="req">*</span>
-                </label>
-                <input type="text" required autocomplete="off" ng-model="companyInfo.companyName"/>
-            </div>
-
-            <div class="field-wrap">
-                <label>
-                    Office Location City<span class="req">*</span>
-                </label>
-                <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationCity"/>
-            </div>
-
-            <div class="field-wrap">
-                <label>
-                    Office Location Street<span class="req">*</span>
-                </label>
-                <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationStreet"/>
-            </div>
-
-            <div class="field-wrap">
-                <label>
-                    Office Location Street Number<span class="req">*</span>
-                </label>
-                <input type="text" required autocomplete="off" ng-model="companyInfo.officeLocationStreetNumber"/>
-            </div>
-
-            <div class="field-wrap">
-                <label>
-                    VAT<span class="req">*</span>
-                </label>
-                <input type="text" required autocomplete="off" ng-model="companyInfo.vat"/>
-            </div>
-
-            <button ng-click="handleCompanyRegistration(companyInfo)" class="button button-block">
-                Create
-            </button>
-
-
-        </form>
-
-    </div>
-
-
-</div> <!-- /form -->
-
+    </div> <!-- /form -->
+</div>
 <script src="../js/index.js"></script>
