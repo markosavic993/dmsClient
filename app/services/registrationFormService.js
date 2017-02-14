@@ -3,16 +3,39 @@
  */
 var app = angular.module("dmsApp");
 
-app.factory("registrationService", function ($http) {
+app.factory("registrationService", function ($http, configService, $location) {
     return {
         login: function (loginInfo) {
-            return $http.post("http://localhost:8080/dms/user/login", loginInfo);
+            $http.post("http://localhost:8080/dms/user/login", loginInfo).then(function (response) {
+                if (response != null) {
+                    configService.getConfig().username = response.data.username;
+                    if (response.data.company != null) {
+                        configService.getConfig().company = response.data.company.companyName;
+                    }
+                    $location.path('/dashboard');
+                } else {
+                    //to do
+                }
+            });
         },
         signup: function (signupInfo) {
-            return $http.post("http://localhost:8080/dms/user/signup", signupInfo);
+            $http.post("http://localhost:8080/dms/user/signup", signupInfo).then(function (response) {
+                if (response != null) {
+                    configService.getConfig().username = response.data.username;
+                    if (response.data.company != null) {
+                        configService.getConfig().company = response.data.company.companyName;
+                    }
+                    configService.getConfig().successfullySignedUp=true;
+                } else {
+                    //to do
+                }
+            });
         },
         registerCompany: function (companyInfo) {
-            return $http.post("http://localhost:8080/dms/company/register", companyInfo);
+            $http.post("http://localhost:8080/dms/company/register", companyInfo).then(function(response){
+                //to do
+                $location.path('/dashboard');
+            });
         }
     }
 });
