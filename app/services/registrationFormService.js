@@ -10,8 +10,9 @@ app.factory("registrationService", function ($http, configService, $location) {
                 if (response != null) {
                     configService.getConfig().username = response.data.username;
                     if (response.data.company != null) {
-                        configService.getConfig().company = response.data.company.companyName;
+                        configService.getConfig().company = response.data.company;
                     }
+                    configService.getConfig().loggedIn = true;
                     $location.path('/dashboard');
                 } else {
                     //to do
@@ -23,9 +24,10 @@ app.factory("registrationService", function ($http, configService, $location) {
                 if (response != null) {
                     configService.getConfig().username = response.data.username;
                     if (response.data.company != null) {
-                        configService.getConfig().company = response.data.company.companyName;
+                        configService.getConfig().company = response.data.company;
                     }
                     configService.getConfig().successfullySignedUp=true;
+                    configService.getConfig().loggedIn = true;
                 } else {
                     //to do
                 }

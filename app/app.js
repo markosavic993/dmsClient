@@ -12,14 +12,31 @@ app.config(function ($routeProvider, cssInjectorProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "partials/registration_form.html",
-            controller: "registrationFormController"
+            controller: "registrationFormController",
+            resolve: {
+                factory: loginChecking
+            }
         })
         .when("/dashboard", {
             templateUrl: "partials/dashboard.html",
-            controller: "dashboardController"
+            controller: "dashboardController",
+            resolve: {
+                factory: loginChecking
+            }
         })
         .otherwise({
                 templateUrl: "partials/notFound.html"
             }
         )
 });
+
+
+var loginChecking = function (configService, $location) {
+    if(configService.getConfig().loggedIn){
+        $location.path('/dashboard');
+        return true;
+    } else {
+        $location.path('/');
+        return true;
+    }
+}

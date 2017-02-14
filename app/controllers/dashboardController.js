@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("dashboardController", function ($scope, $location, cssInjector) {
+app.controller("dashboardController", function ($scope, dashboardService, $location, cssInjector) {
     var vm = this;
 
     cssInjector.add("../css/dashboard.css");
@@ -21,5 +21,9 @@ app.controller("dashboardController", function ($scope, $location, cssInjector) 
 
     $scope.showActivitiesTab = function () {
         $scope.template = $scope.templates[0];
+    }
+
+    $scope.logOut = function(){
+        dashboardService.logOut();
     }
 });
