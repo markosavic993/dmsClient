@@ -3,10 +3,12 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("dashboardController", function ($scope, dashboardService, $location, cssInjector) {
+app.controller("dashboardController", function ($scope, configService, dashboardService, $location, cssInjector) {
     var vm = this;
 
     cssInjector.add("../css/dashboard.css");
+
+    $scope.configService = configService;
 
     $scope.templates = [
         { name: 'activites', url: '../partials/activities.html'},
