@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.factory("registrationService", function ($http, configService, $location) {
+app.factory("registrationService", function ($http, configService, $location, userService) {
     return {
         login: function (loginInfo) {
             $http.post("http://localhost:8080/user/login", loginInfo).then(function (response) {
@@ -29,9 +29,12 @@ app.factory("registrationService", function ($http, configService, $location) {
             });
         },
         registerCompany: function (companyInfo) {
+            companyInfo.user = configService.getConfig().user;
             $http.post("http://localhost:8080/company/register", companyInfo).then(function(response){
                 //to do
                 configService.getConfig().company = response.data;
+                configService.getConfig().user.company = response.data;
+                userService.updateUser(configService.getConfig().user);
                 $location.path('/dashboard');
             });
         }

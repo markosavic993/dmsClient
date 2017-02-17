@@ -12,6 +12,14 @@ app.factory("userService", function ($http, configService) {
                 }, function (error) {
                     //TODO handle error response
                 })
+        },
+        updateUser: function (user) {
+            $http.post("http://localhost:8080/user/update", user)
+                .then(function (response) {
+                    configService.getConfig().user = response.data;
+                }, function (error) {
+                    //TODO handle error response
+                })
         }
     }
 });
