@@ -9,8 +9,9 @@ var app = angular.module("dmsApp");
 app.factory("configService", function () {
 
     var Config = {
-        username : '',
-        company : null,
+        users: undefined,
+        user : undefined,
+        company : undefined,
         loggedIn : false,
         successfullySignedUp : false
     }
@@ -25,10 +26,9 @@ app.factory("configService", function () {
     }
 
     function resolveUser() {
-        Config.username = '';
-        Config.company = null;
+        Config.user = undefined;
+        Config.company = undefined;
         Config.loggedIn = false;
         Config.successfullySignedUp = false;
-
     }
 });

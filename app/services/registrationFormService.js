@@ -8,7 +8,7 @@ app.factory("registrationService", function ($http, configService, $location) {
         login: function (loginInfo) {
             $http.post("http://localhost:8080/dms/user/login", loginInfo).then(function (response) {
                 if (response != null) {
-                    configService.getConfig().username = response.data.username;
+                    configService.getConfig().user = response.data;
                     configService.getConfig().company = response.data.company;
                     configService.getConfig().loggedIn = true;
                     $location.path('/dashboard');
@@ -20,8 +20,7 @@ app.factory("registrationService", function ($http, configService, $location) {
         signup: function (signupInfo) {
             $http.post("http://localhost:8080/dms/user/signup", signupInfo).then(function (response) {
                 if (response != null) {
-                    configService.getConfig().username = response.data.username;
-                    configService.getConfig().company = response.data.company;
+                    configService.getConfig().user = response.data;
                     configService.getConfig().successfullySignedUp=true;
                     configService.getConfig().loggedIn = true;
                 } else {
@@ -32,7 +31,7 @@ app.factory("registrationService", function ($http, configService, $location) {
         registerCompany: function (companyInfo) {
             $http.post("http://localhost:8080/dms/company/register", companyInfo).then(function(response){
                 //to do
-                configService.getConfig().company = response.data.company;
+                configService.getConfig().company = response.data;
                 $location.path('/dashboard');
             });
         }
