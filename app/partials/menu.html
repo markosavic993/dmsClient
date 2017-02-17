@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Document Management System</a>
+                <a class="navbar-brand" href="#">Document Management System - {{configService.getConfig().company.companyName}}</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -39,7 +39,7 @@
                 <ul class="nav nav-sidebar">
                     <li><a href="#/dashboard" ng-click="showProcessesTab()">Processes</a></li>
                     <li><a href="#/dashboard" ng-click="showActivitiesTab()">Activities</a></li>
-                    <li><a href="#/dashboard">Employees</a></li>
+                    <li><a href="#/dashboard" ng-click="showEmployeesTab()">Employees</a></li>
                     <li><a href="#/dashboard">History</a></li>
                 </ul>
             </div>

@@ -1,0 +1,21 @@
+<div ng-controller="userController as ctrl">
+    <h1 class="page-header">Employees</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Second Name</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="user in ctrl.users">
+        <tr>
+            <td><strong>{{user.username}}</strong></td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.role}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -12,7 +12,8 @@ app.controller("dashboardController", function ($scope, configService, dashboard
 
     $scope.templates = [
         { name: 'activites', url: '../partials/activities.html'},
-        { name: 'processes', url: '../partials/processes.html'}
+        { name: 'processes', url: '../partials/processes.html'},
+        { name: 'users', url: '../partials/employees.html'}
     ];
 
     $scope.template = $scope.templates[0];
@@ -23,6 +24,10 @@ app.controller("dashboardController", function ($scope, configService, dashboard
 
     $scope.showActivitiesTab = function () {
         $scope.template = $scope.templates[0];
+    }
+
+    $scope.showEmployeesTab = function () {
+        $scope.template = $scope.templates[2];
     }
 
     $scope.logOut = function(){
