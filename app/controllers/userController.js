@@ -6,6 +6,7 @@ var app = angular.module("dmsApp");
 app.controller('userController', function (userService, configService) {
     var vm = this;
     vm.users = undefined;
+    vm.selectedUser = undefined;
 
     function initUsers() {
         vm.users = configService.getConfig().users;
@@ -17,5 +18,13 @@ app.controller('userController', function (userService, configService) {
     };
 
     loadUsers(configService.getConfig().company);
+
+    vm.isUserAdmin = function () {
+        return configService.getConfig().user.role == 'ADMIN';
+    }
+
+    vm.setSelectedUser = function (user) {
+        vm.selectedUser = user;
+    }
 
 });
