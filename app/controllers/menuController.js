@@ -3,6 +3,10 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("menuController", function () {
+app.controller("menuController", function (configService) {
     var vm = this;
+
+    vm.isUserAdmin = function () {
+        return configService.getConfig().user.role == 'ADMIN';
+    }
 });
