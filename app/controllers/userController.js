@@ -8,13 +8,11 @@ app.controller('userController', function (userService, configService) {
     vm.users = undefined;
     vm.selectedUser = undefined;
 
-    function initUsers() {
-        vm.users = configService.getConfig().users;
-    }
-
     var loadUsers = function (company) {
-        userService.loadUsers(company.vat);
-        initUsers();
+        userService.loadUsers(company.vat)
+            .then(function (response) {
+                vm.users = response.data;
+            });
     };
 
     loadUsers(configService.getConfig().company);
@@ -25,6 +23,21 @@ app.controller('userController', function (userService, configService) {
 
     vm.setSelectedUser = function (user) {
         vm.selectedUser = user;
+    }
+    
+    vm.updateUser = function (updates) {
+        vm.selectedUser.firstName = updates.firstName;
+        vm.selectedUser.lastName = updates.lastName;
+        vm.selectedUser.username = updates.username;
+        vm.selectedUser.role = updates.role;
+        console.log(vm.selectedUser);
+        userService.updateUser(vm.selectedUser)
+            .then(loadUsers(configService.getConfig().company));
+    }
+
+    vm.deleteUser = function (user) {
+        userService.deleteUser(user)
+            .then(loadUsers(configService.getConfig().company));
     }
 
 });

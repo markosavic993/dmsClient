@@ -9,7 +9,6 @@ var app = angular.module("dmsApp");
 app.factory("configService", function () {
 
     var Config = {
-        users: undefined,
         user : undefined,
         company : undefined,
         loggedIn : false,

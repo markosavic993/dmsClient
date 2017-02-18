@@ -11,7 +11,7 @@ app.controller("dashboardController", function ($scope, configService, dashboard
     $scope.configService = configService;
 
     $scope.templates = [
-        { name: 'activites', url: '../partials/activities.html'},
+        { name: 'activities', url: '../partials/activities.html'},
         { name: 'processes', url: '../partials/processes.html'},
         { name: 'users', url: '../partials/employees.html'}
     ];

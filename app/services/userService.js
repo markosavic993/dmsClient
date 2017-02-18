@@ -3,23 +3,16 @@
  */
 var app = angular.module("dmsApp");
 
-app.factory("userService", function ($http, configService) {
+app.factory("userService", function ($http, configService, $q) {
     return {
         loadUsers: function (vat) {
-            $http.get("http://localhost:8080/user/loadusers/" + vat)
-                .then(function (response) {
-                    configService.getConfig().users = response.data;
-                }, function (error) {
-                    //TODO handle error response
-                })
+            return $http.get("http://localhost:8080/user/loadusers/" + vat);
         },
         updateUser: function (user) {
-            $http.post("http://localhost:8080/user/update", user)
-                .then(function (response) {
-                    configService.getConfig().user = response.data;
-                }, function (error) {
-                    //TODO handle error response
-                })
+            return $http.post("http://localhost:8080/user/update", user);
+        },
+        deleteUser: function (user) {
+            return $http.post("http://localhost:8080/user/delete", user);
         }
     }
 });
