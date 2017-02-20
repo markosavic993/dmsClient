@@ -1,6 +1,17 @@
 <div class="col-md-8">
     <h1 class="page-header">Processes</h1>
 
-    This is processes tab.
+    <table>
+        <thead>
+        <tr>
+            <th>Process name</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="process in vm.users">
+        <tr>
+            <td><strong>{{process.processName}}</strong></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>

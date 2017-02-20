@@ -8,6 +8,15 @@ app.factory("dashboardService", function (configService, $location) {
         logOut: function () {
             configService.resolveUser();
             $location.path('/');
+        },
+        loadProcesses: function(){
+            $http.get("http://localhost:8080/process/"+configService.getConfig().company.vat).then(function (response) {
+                if (response != null) {
+                    configService.getConfig().processes = response.data;
+                } else {
+                    //to do
+                }
+            });
         }
     }
 });

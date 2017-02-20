@@ -33,4 +33,6 @@ app.controller("dashboardController", function ($scope, configService, dashboard
     $scope.logOut = function(){
         dashboardService.logOut();
     }
+
+    $scope.processes = configService.getConfig().processes;
 });
