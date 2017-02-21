@@ -10,6 +10,7 @@ app.controller("dashboardController", function ($scope, configService, dashboard
 
     $scope.configService = configService;
 
+
     $scope.templates = [
         { name: 'activities', url: '../partials/activities.html'},
         { name: 'processes', url: '../partials/processes.html'},
@@ -19,7 +20,14 @@ app.controller("dashboardController", function ($scope, configService, dashboard
     $scope.template = $scope.templates[0];
 
     $scope.showProcessesTab = function(){
-        $scope.template = $scope.templates[1];
+        dashboardService.loadProcesses().then(function(response){
+            if (response != null) {
+                configService.getConfig().processes = response.data;
+            } else {
+                //to do
+            }
+            $scope.template = $scope.templates[1];
+        })
     }
 
     $scope.showActivitiesTab = function () {
