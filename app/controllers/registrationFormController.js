@@ -10,7 +10,7 @@ app.controller("registrationFormController", function (configService,registratio
     $scope.configService = configService;
 
     vm.handleLoginRequest = function (loginInfo) {
-        if(signupInfo != undefined && signupInfo.username != undefined && signupInfo.password != undefined) {
+        if(loginInfo != undefined && loginInfo.username != undefined && loginInfo.password != undefined) {
             registrationService.login(loginInfo);
         }
     }
@@ -22,8 +22,12 @@ app.controller("registrationFormController", function (configService,registratio
     }
 
     vm.handleCompanyRegistration = function (companyInfo) {
-        if(signupInfo != undefined && signupInfo.companyName != undefined && signupInfo.officeLocationCity != undefined && signupInfo.officeLocationStreet != undefined && signupInfo.officeLocationNumber != undefined && signupInfo.vat != undefined ) {
+        if(companyInfo != undefined && companyInfo.companyName != undefined && companyInfo.officeLocationCity != undefined && companyInfo.officeLocationStreet != undefined && companyInfo.officeLocationStreetNumber != undefined && companyInfo.vat != undefined ) {
             registrationService.registerCompany(companyInfo);
         }
+    }
+
+    vm.resolveError = function () {
+        configService.resolveError();
     }
 });

@@ -3,7 +3,7 @@
     <div ng-hide="configService.getConfig().successfullySignedUp" class="form">
 
         <div ng-show="configService.getConfig().error" class="alert alert-danger alert-dismissable">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <a class="close" data-dismiss="alert" aria-label="close" ng-click="vm.resolveError()">×</a>
             <strong>Alert!</strong> {{configService.getConfig().errorMessage}}
         </div>
 
@@ -89,6 +89,11 @@
     </div> <!-- /form -->
 
     <div ng-show="configService.getConfig().successfullySignedUp" class="form">
+
+        <div ng-show="configService.getConfig().error" class="alert alert-danger alert-dismissable">
+            <a class="close" data-dismiss="alert" aria-label="close" ng-click="vm.resolveError()">×</a>
+            <strong>Alert!</strong> {{configService.getConfig().errorMessage}}
+        </div>
 
         <div id="company_register">
             <h1>Create company and manage it's documentation now</h1>

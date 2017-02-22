@@ -20,7 +20,8 @@ app.factory("configService", function () {
 
     return {
         getConfig: getConfig,
-        resolveUser: resolveUser
+        resolveUser: resolveUser,
+        resolveError: resolveError
     };
 
     function getConfig(){
@@ -33,6 +34,11 @@ app.factory("configService", function () {
         Config.loggedIn = false;
         Config.successfullySignedUp = false;
         Config.processes = undefined;
+        Config.error = false;
+        Config.errorMessage = undefined;
+    }
+
+    function resolveError(){
         Config.error = false;
         Config.errorMessage = undefined;
     }
