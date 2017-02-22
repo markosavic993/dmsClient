@@ -1,5 +1,12 @@
 <div ng-controller="registrationFormController as vm">
+
     <div ng-hide="configService.getConfig().successfullySignedUp" class="form">
+
+        <div ng-show="configService.getConfig().error" class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Alert!</strong> {{configService.getConfig().errorMessage}}
+        </div>
+
         <ul class="tab-group">
             <li class="tab active"><a href="#signup">Sign Up</a></li>
             <li class="tab"><a href="#login">Log In</a></li>
@@ -16,14 +23,14 @@
                             <label>
                                 First Name<span class="req">*</span>
                             </label>
-                            <input type="text" required autocomplete="off" ng-model="signupInfo.firstName"/>
+                            <input type="text" pattern="\b[a-zA-Z]{2,}\b" oninvalid="this.setCustomValidity('First name must contain at least two letters')" oninput="setCustomValidity('')" required autocomplete="off" ng-model="signupInfo.firstName"/>
                         </div>
 
                         <div class="field-wrap">
                             <label>
                                 Last Name<span class="req">*</span>
                             </label>
-                            <input type="text" required autocomplete="off" ng-model="signupInfo.lastName"/>
+                            <input type="text" pattern="\b[a-zA-Z]{2,}\b" oninvalid="this.setCustomValidity('Last name must contain at least two letters')" oninput="setCustomValidity('')" required autocomplete="off" ng-model="signupInfo.lastName"/>
                         </div>
                     </div>
 
@@ -31,20 +38,19 @@
                         <label>
                             Choose Username<span class="req">*</span>
                         </label>
-                        <input type="text" required autocomplete="off" ng-model="signupInfo.username"/>
+                        <input type="text" pattern=".{4,}" oninvalid="this.setCustomValidity('Username must contain at least four characters')" oninput="setCustomValidity('')" required autocomplete="off" ng-model="signupInfo.username"/>
                     </div>
 
                     <div class="field-wrap">
                         <label>
                             Set A Password<span class="req">*</span>
                         </label>
-                        <input type="password" required autocomplete="off" ng-model="signupInfo.password"/>
+                        <input type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" oninvalid="this.setCustomValidity('Password must contain at least six character, from whom one must be a digit')" oninput="setCustomValidity('')" required autocomplete="off" ng-model="signupInfo.password"/>
                     </div>
 
                     <button ng-click="vm.handleSignupRequest(signupInfo)" class="button button-block">
                         Get Started
                     </button>
-
                 </form>
 
             </div>
@@ -121,7 +127,7 @@
                     <label>
                         VAT<span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" ng-model="companyInfo.vat"/>
+                    <input type="text" pattern="^([0-9]{9})$" oninvalid="this.setCustomValidity('Vat must contain exactly 9 digits')" oninput="setCustomValidity('')" required autocomplete="off" ng-model="companyInfo.vat"/>
                 </div>
 
                 <button ng-click="vm.handleCompanyRegistration(companyInfo)" class="button button-block">

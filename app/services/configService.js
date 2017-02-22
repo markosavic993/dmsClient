@@ -13,7 +13,9 @@ app.factory("configService", function () {
         company : undefined,
         processes: undefined,
         loggedIn : false,
-        successfullySignedUp : false
+        successfullySignedUp : false,
+        error : false,
+        errorMessage: undefined
     }
 
     return {
@@ -31,5 +33,7 @@ app.factory("configService", function () {
         Config.loggedIn = false;
         Config.successfullySignedUp = false;
         Config.processes = undefined;
+        Config.error = false;
+        Config.errorMessage = undefined;
     }
 });
