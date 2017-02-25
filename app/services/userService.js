@@ -13,6 +13,9 @@ app.factory("userService", function ($http, configService, $q) {
         },
         deleteUser: function (user) {
             return $http.post("http://localhost:8080/user/delete", user);
+        },
+        addEmployee: function (employee) {
+            return $http.post("http://localhost:8080/user/addEmployee", employee);
         }
     }
 });
