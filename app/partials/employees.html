@@ -1,5 +1,10 @@
-<div ng-controller="userController as ctrl">
+<div ng-controller="userController as ctrl" ng-init="ctrl.loadUsers(configService.getConfig().company)">
     <h1 class="page-header">Employees</h1>
+    <div>
+        <p data-placement="top" data-toggle="tooltip" title="Create">
+            <a class="btn btn-lg btn-primary" data-title="Create" data-toggle="modal" data-target="#create"><span class="glyphicon glyphicon-plus-sign"></span> Add new employee</a>
+        </p>
+    </div>
     <table>
         <thead>
         <tr>
@@ -35,6 +40,45 @@
         </tbody>
     </table>
 
+    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Create employee</h4>
+                </div>
+                <form id="createUserForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control " type="text" id="fn"
+                                   placeholder="Enter first name"
+                                   ng-model="employee.firstName">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control " type="text" id="ln"
+                                   placeholder="Enter lastname"
+                                   ng-model="employee.lastName">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control " type="text" id="un"
+                                   placeholder="Enter username"
+                                   ng-model="employee.username">
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer ">
+                    <button ng-click="ctrl.addEmployee(employee)" type="submit" class="btn btn-primary btn-lg"
+                            style="width: 100%;">
+                        <span class="glyphicon glyphicon-ok-sign"></span> Create
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -46,30 +90,26 @@
                 <form id="updateUserForm">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input class="form-control " type="text" id="firstName" placeholder="{{ctrl.selectedUser.firstName}}"
+                            <input class="form-control " type="text" id="firstName"
+                                   placeholder="{{ctrl.selectedUser.firstName}}"
                                    ng-model="updates.firstName">
                         </div>
                         <div class="form-group">
-                            <input class="form-control " type="text" id="lastName" placeholder="{{ctrl.selectedUser.lastName}}"
+                            <input class="form-control " type="text" id="lastName"
+                                   placeholder="{{ctrl.selectedUser.lastName}}"
                                    ng-model="updates.lastName">
                         </div>
                         <div class="form-group">
-                            <input class="form-control " type="text" id="username" placeholder="{{ctrl.selectedUser.username}}"
+                            <input class="form-control " type="text" id="username"
+                                   placeholder="{{ctrl.selectedUser.username}}"
                                    ng-model="updates.username">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" id="rule" placeholder="{{ctrl.selectedUser.role}}"
-                                    ng-model="updates.role">
-                                <option value="ADMIN">ADMIN</option>
-                                <option value="EMPLOYEE">EMPLOYEE</option>
-                            </select>
                         </div>
                     </div>
                 </form>
                 <div class="modal-footer ">
                     <button ng-click="ctrl.updateUser(updates)" type="submit" class="btn btn-warning btn-lg"
-                            data-dismiss="modal" style="width: 100%;"><span
-                            class="glyphicon glyphicon-ok-sign"></span> Update
+                            style="width: 100%;">
+                        <span class="glyphicon glyphicon-ok-sign"></span> Update
                     </button>
                 </div>
             </div>
@@ -95,7 +135,8 @@
 
                 </div>
                 <div class="modal-footer ">
-                    <button ng-click="ctrl.deleteUser(ctrl.selectedUser)" type="button" data-dismiss="modal" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes
+                    <button ng-click="ctrl.deleteUser(ctrl.selectedUser)" type="button" data-dismiss="modal"
+                            class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span
                             class="glyphicon glyphicon-remove"></span> No

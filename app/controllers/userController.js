@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller('userController', function (userService, configService) {
+app.controller('userController', function (userService, configService, modalValidationService) {
     var vm = this;
     vm.users = undefined;
     vm.selectedUser = undefined;
@@ -24,20 +24,38 @@ app.controller('userController', function (userService, configService) {
     vm.setSelectedUser = function (user) {
         vm.selectedUser = user;
     }
-    
+
+    function validateData(updates) {
+        return modalValidationService.checkDataValidity(updates)
+    }
+
     vm.updateUser = function (updates) {
+        if(!validateData(updates)) {
+            return;
+        }
         vm.selectedUser.firstName = updates.firstName;
         vm.selectedUser.lastName = updates.lastName;
         vm.selectedUser.username = updates.username;
-        vm.selectedUser.role = updates.role;
         console.log(vm.selectedUser);
         userService.updateUser(vm.selectedUser)
-            .then(loadUsers(configService.getConfig().company));
+            .then(function (response) {
+                loadUsers(configService.getConfig().company);
+            });
     }
 
     vm.deleteUser = function (user) {
         userService.deleteUser(user)
-            .then(loadUsers(configService.getConfig().company));
+            .then(function (res) {
+                loadUsers(configService.getConfig().company)
+            });
+    }
+
+    vm.addEmployee = function (employee) {
+        employee.company = configService.getConfig().company;
+        userService.addEmployee(employee)
+            .then(function (response) {
+                loadUsers(configService.getConfig().company);
+            })
     }
 
 });

@@ -1,0 +1,46 @@
+<div ng-controller="documentTypesController">
+    <form class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Add document model</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Document name</label>
+                <div class="col-md-5">
+                    <input id="textinput" name="textinput" type="text" placeholder="Enter the name of document"
+                           class="form-control input-md" required="You have to enter name of the document."
+                           ng-model="documentType.documentTypeName">
+
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textarea">Text Area</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="textarea" name="textarea" rows="10"
+                              ng-model="documentType.documentTypeDescription"></textarea>
+                </div>
+            </div>
+
+            <!-- File Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="filebutton">Upload model</label>
+                <div class="col-md-4">
+                    <input id="filebutton" name="filebutton" class="input-file" type="file" file-model="myFile">
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="uploadFile(documentType)">Save model</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
