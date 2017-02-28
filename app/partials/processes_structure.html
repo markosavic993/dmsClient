@@ -1,0 +1,18 @@
+<div ng-controller="processesStructureController as ctrl">
+<div ui-tree >
+    <ol ui-tree-nodes="" ng-model="ctrl.processes">
+        <li ng-repeat="process in ctrl.processes" ui-tree-node>
+            <div ui-tree-handle>
+                {{process.processName}}
+            </div>
+            <ol  ui-tree-nodes="" ng-model="ctrl.processes.childProcesses">
+                <li ng-repeat="childProcess in ctrl.processes.childProcesses" ui-tree-node>
+                    <div ui-tree-handle>
+                        {{childProcess.processName}}
+                    </div>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>
+</div>

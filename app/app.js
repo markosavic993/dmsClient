@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var app = angular.module("dmsApp", ["ngRoute", "angular.css.injector"]);
+var app = angular.module("dmsApp", ["ngRoute", "angular.css.injector","ui.tree"]);
 
 app.config(function ($routeProvider, cssInjectorProvider) {
 
