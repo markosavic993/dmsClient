@@ -1,12 +1,13 @@
 <div ng-controller="processesStructureController as ctrl">
 <div ui-tree >
-    <ol ui-tree-nodes="" ng-model="ctrl.processes">
-        <li ng-repeat="process in ctrl.processes" ui-tree-node>
+    <br/>
+    <ol ui-tree-nodes="" ng-model="structuredProcesses">
+        <li ng-repeat="process in structuredProcesses track by $index" ui-tree-node>
             <div ui-tree-handle>
                 {{process.processName}}
             </div>
-            <ol  ui-tree-nodes="" ng-model="ctrl.processes.childProcesses">
-                <li ng-repeat="childProcess in ctrl.processes.childProcesses" ui-tree-node>
+            <ol  ui-tree-nodes="" ng-model="process.childProcesses">
+                <li ng-repeat="childProcess in process.childProcesses track by $index" ui-tree-node>
                     <div ui-tree-handle>
                         {{childProcess.processName}}
                     </div>
