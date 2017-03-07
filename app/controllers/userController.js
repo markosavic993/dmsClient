@@ -39,6 +39,7 @@ app.controller('userController', function (userService, configService, modalVali
         console.log(vm.selectedUser);
         userService.updateUser(vm.selectedUser)
             .then(function (response) {
+                toastr.success("Employee successfully updated!", "Success");
                 loadUsers(configService.getConfig().company);
             });
     }
@@ -46,14 +47,19 @@ app.controller('userController', function (userService, configService, modalVali
     vm.deleteUser = function (user) {
         userService.deleteUser(user)
             .then(function (res) {
+                toastr.success("Employee successfully deleted!", "Success");
                 loadUsers(configService.getConfig().company)
             });
     }
 
     vm.addEmployee = function (employee) {
+        if(!validateData(employee)) {
+            return;
+        }
         employee.company = configService.getConfig().company;
         userService.addEmployee(employee)
             .then(function (response) {
+                toastr.success("Employee successfully created!", "Success");
                 loadUsers(configService.getConfig().company);
             })
     }

@@ -7,37 +7,39 @@ app.factory("modalValidationService", function (configService) {
     var firstName = $("#firstName");
     var lastName = $("#lastName");
     var username = $("#username");
+
+    function emptyFormFields() {
+        firstName.val("");
+        lastName.val("");
+        username.val("")
+    }
+
     return {
         checkDataValidity: function (data) {
             if(data == undefined) {
-                console.log(firstName)
-                firstName.css("border-color", "red");
-                firstName.attr("placeholder", "Insert your first name please");
-                lastName.css("border-color", "red");
-                lastName.attr("placeholder", "Insert your last name please");
-                username.css("border-color", "red");
-                username.attr("placeholder", "Insert your username please");
+                emptyFormFields();
+                toastr.error("All fields are mandatory!", "Error");
+
                 return false;
             }
 
             if(data.firstName == undefined || data.firstName.length < 3) {
-                firstName.style.borderColor = "red";
-                firstName.attr("placeholder", "Insert your first name please");
+                emptyFormFields();
+                toastr.error("Insert first name please (min 3 characters)!", "Error");
                 return false;
             }
 
             if(data.lastName == undefined || data.lastName.length < 3) {
-                lastName.css("border-color", "red");
-                lastName.attr("placeholder", "Insert your last name please");
+                emptyFormFields();
+                toastr.error("Insert last name please (min 3 characters)!", "Error");
                 return false;
             }
 
             if(data.username == undefined || data.username.length < 4) {
-                username.css("border-color", "red");
-                username.attr("placeholder", "Insert your username please");
+                emptyFormFields();
+                toastr.error("Insert username please (min 4 characters)!", "Error");
                 return false;
             }
-            $("#edit").modal("toggle");
             return true;
         }
     }
