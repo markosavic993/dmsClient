@@ -1,19 +1,19 @@
 <div ng-controller="processesStructureController as ctrl">
-<div ui-tree >
-    <br/>
-    <ol ui-tree-nodes="" ng-model="structuredProcesses">
-        <li ng-repeat="process in structuredProcesses track by $index" ui-tree-node>
-            <div ui-tree-handle>
-                {{process.processName}}
-            </div>
-            <ol  ui-tree-nodes="" ng-model="process.childProcesses">
-                <li ng-repeat="childProcess in process.childProcesses track by $index" ui-tree-node>
-                    <div ui-tree-handle>
-                        {{childProcess.processName}}
-                    </div>
-                </li>
-            </ol>
-        </li>
-    </ol>
-</div>
+    <script type="text/ng-template" id="process_renderer.html">
+        {{process.processName}}
+        <ul class="list-group" ng-if="process.childProcesses">
+            <li class="list-group-item" ng-repeat="process in process.childProcesses track by $index"
+                ng-include="'process_renderer.html'">
+            </li>
+        </ul>
+    </script>
+    <div class="col-md-8">
+        <ul>
+            <li class="list-group-item" ng-repeat="process in structuredProcesses track by $index"
+                ng-include="'process_renderer.html'"></li>
+        </ul>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Add process</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal">Delete process</button>
+    </div>
+    <div ng-include="'../partials/modal.html'"></div>
 </div>

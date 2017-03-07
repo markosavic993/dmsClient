@@ -16,7 +16,8 @@ app.factory("configService", function () {
         successfullySignedUp: false,
         error: false,
         errorMessage: undefined,
-        structuredProcesses: undefined
+        structuredProcesses: undefined,
+        allocatedProcesses: undefined
     }
 
     return {
@@ -39,6 +40,7 @@ app.factory("configService", function () {
         Config.error = false;
         Config.errorMessage = undefined;
         Config.structuredProcesses = undefined;
+        Config.allocatedProcesses = undefined;
     }
 
     function resolveError() {
@@ -50,12 +52,18 @@ app.factory("configService", function () {
     function restructureProcesses() {
 
         Config.structuredProcesses = [];
+        Config.allocatedProcesses = [];
         var k = 0;
+
         while (k < Config.processes.length) {
             for (i = 0; i < Config.processes.length; i++) {
                 if (Config.processes[i].parentProcess == null) {
                     if (!contains(Config.structuredProcesses, Config.processes[i])) {
+                        if(k>=Config.processes.length){
+                            break;
+                        }
                         Config.structuredProcesses.push(Config.processes[i]);
+                        Config.allocatedProcesses.push(Config.processes[i]);
                         k++;
                     }
                 } else {
@@ -65,7 +73,11 @@ app.factory("configService", function () {
                             process.childProcesses = [];
                         }
                         if (!contains(process.childProcesses, Config.processes[i])) {
+                            if(k>=Config.processes.length){
+                                break;
+                            }
                             process.childProcesses.push(Config.processes[i]);
+                            Config.allocatedProcesses.push(Config.processes[i]);
                             k++;
                         }
                     }
@@ -84,9 +96,9 @@ app.factory("configService", function () {
     }
 
     function getParent(process) {
-        for (j = 0; j < Config.structuredProcesses.length; j++) {
-            if (process.parentProcess.processId == Config.structuredProcesses[j].processId) {
-                return Config.structuredProcesses[j];
+        for (j = 0; j < Config.allocatedProcesses.length; j++) {
+            if (process.parentProcess.processId == Config.allocatedProcesses[j].processId) {
+                return Config.allocatedProcesses[j];
             }
         }
         return null;
