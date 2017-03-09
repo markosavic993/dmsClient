@@ -29,6 +29,7 @@ app.controller("dashboardController", function ($scope, configService, dashboard
                     configService.getConfig().processes = response.data;
                     $scope.processes = response.data;
                 } else {
+                    //to do
                 }
                 $scope.template = $scope.templates[1];
             })
@@ -51,12 +52,15 @@ app.controller("dashboardController", function ($scope, configService, dashboard
                     configService.getConfig().processes = response.data;
                     configService.restructureProcesses();
                     $scope.structuredProcesses = configService.getConfig().structuredProcesses;
+                    $scope.processes = configService.getConfig().processes;
                 } else {
                     //to do
                 }
                 $scope.template = $scope.templates[3];
             })
         } else {
+            $scope.processes = configService.getConfig().processes;
+            $scope.structuredProcesses = configService.getConfig().structuredProcesses;
             $scope.template = $scope.templates[3];
         }
     }

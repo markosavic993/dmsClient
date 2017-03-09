@@ -12,8 +12,10 @@
             <li class="list-group-item" ng-repeat="process in structuredProcesses track by $index"
                 ng-include="'process_renderer.html'"></li>
         </ul>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Add process</button>
+            <button type="button" class="btn btn-primary" ng-click="openAddProcessModal()" data-toggle="modal" data-target="#modal">Add process</button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal">Delete process</button>
+            <button type="button" class="btn btn-primary" ng-click="openAddActivityModal()" data-toggle="modal" data-target="#modal">Add activity</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal">Delete activity</button>
     </div>
-    <div ng-include="'../partials/modal.html'"></div>
+    <div ng-include="'../partials/abstract_modal.html'"></div>
 </div>
