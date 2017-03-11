@@ -17,7 +17,8 @@ app.factory("configService", function () {
         error: false,
         errorMessage: undefined,
         structuredProcesses: undefined,
-        allocatedProcesses: undefined
+        allocatedProcesses: undefined,
+        documentTypes: undefined
     }
 
     return {
@@ -41,6 +42,7 @@ app.factory("configService", function () {
         Config.errorMessage = undefined;
         Config.structuredProcesses = undefined;
         Config.allocatedProcesses = undefined;
+        Config.documentTypes = undefined;
     }
 
     function resolveError() {
