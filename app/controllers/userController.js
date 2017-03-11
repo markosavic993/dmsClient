@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller('userController', function (userService, configService, modalValidationService) {
+app.controller('userController', function (userService, configService, modalValidationService, $location) {
     var vm = this;
     vm.users = undefined;
     vm.selectedUser = undefined;
@@ -30,7 +30,7 @@ app.controller('userController', function (userService, configService, modalVali
     }
 
     vm.updateUser = function (updates) {
-        if(!validateData(updates)) {
+        if (!validateData(updates)) {
             return;
         }
         vm.selectedUser.firstName = updates.firstName;
@@ -53,7 +53,7 @@ app.controller('userController', function (userService, configService, modalVali
     }
 
     vm.addEmployee = function (employee) {
-        if(!validateData(employee)) {
+        if (!validateData(employee)) {
             return;
         }
         employee.company = configService.getConfig().company;
@@ -62,6 +62,25 @@ app.controller('userController', function (userService, configService, modalVali
                 toastr.success("Employee successfully created!", "Success");
                 loadUsers(configService.getConfig().company);
             })
+    }
+
+    function hasNumbers(t) {
+        return /\d/.test(t);
+    }
+
+    vm.changePassword = function (password) {
+        if(password == undefined || password.length < 6 || !hasNumbers(password)) {
+            toastr.error("Password must contain at least six characters including min one numeric value!");
+            return;
+        }
+        var user = configService.getConfig().user;
+        user.password = password;
+        userService.changeUserPassword(user)
+            .then(function (response) {
+                toastr.success("Password successfully changed!", "Success");
+                configService.getConfig().user = response.data;
+                $location.path("/");
+            });
     }
 
 });

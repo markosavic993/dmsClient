@@ -1,0 +1,50 @@
+<div ng-controller="userController as ctrl">
+    <h1 class="page-header">Profile</h1>
+
+    <div class="container">
+        <div>First name: <span><strong>{{configService.getConfig().user.firstName}}</strong></span></div>
+        <br>
+        <br>
+        <div>Last name: <span><strong>{{configService.getConfig().user.lastName}}</strong></span></div>
+        <br>
+        <br>
+        <div>Username: <span><strong>{{configService.getConfig().user.username}}</strong></span></div>
+        <br>
+        <br>
+        <div>
+            <button class="btn btn-primary" data-title="ChangePassword"
+                    data-toggle="modal" data-target="#pass">Change password</button>
+
+            <div id="pass" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                            <h4 class="modal-title" id="myModalLabel">Change password</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input class="form-control " type="password" id="currentPassword"
+                                       placeholder="Enter current password">
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input class="form-control " type="password" id="newPassword"
+                                       placeholder="Enter new password"
+                                        ng-model="password">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" ng-click="ctrl.changePassword(password)" type="submit" class="btn btn-primary btn-lg"
+                                    style="width: 100%;">
+                                <span class="glyphicon glyphicon-ok-sign"></span> Change password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

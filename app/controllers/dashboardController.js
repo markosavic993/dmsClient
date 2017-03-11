@@ -17,7 +17,9 @@ app.controller("dashboardController", function ($scope, configService, dashboard
         { name: 'processes', url: '../partials/processes.html'},
         { name: 'users', url: '../partials/employees.html'},
         { name: 'processes_structure', url: '../partials/processes_structure.html'},
-        { name: "documentTypes", url: '../partials/documentTypes.html'}
+        { name: "documentTypes", url: '../partials/documentTypes.html'},
+        { name: 'help', url: '../partials/help.html'},
+        { name: 'profile', url: '../partials/profile.html'}
     ];
 
     $scope.template = $scope.templates[0];
@@ -71,6 +73,14 @@ app.controller("dashboardController", function ($scope, configService, dashboard
 
     $scope.showDocumentsTypes = function () {
         $scope.template = $scope.templates[4];
+    }
+
+    $scope.showHelpTab = function () {
+        $scope.template = $scope.templates[5];
+    }
+
+    $scope.showProfileTab = function () {
+        $scope.template = $scope.templates[6];
     }
 
     $scope.logOut = function(){
