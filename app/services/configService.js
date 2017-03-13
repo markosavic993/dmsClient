@@ -18,14 +18,16 @@ app.factory("configService", function () {
         errorMessage: undefined,
         structuredProcesses: undefined,
         allocatedProcesses: undefined,
-        documentTypes: undefined
+        documentTypes: undefined,
+        complexProcesses: undefined
     }
 
     return {
         getConfig: getConfig,
         resolveUser: resolveUser,
         resolveError: resolveError,
-        restructureProcesses: restructureProcesses
+        restructureProcesses: restructureProcesses,
+        retrieveComplexProcesses: retrieveComplexProcesses
     };
 
     function getConfig() {
@@ -43,6 +45,7 @@ app.factory("configService", function () {
         Config.structuredProcesses = undefined;
         Config.allocatedProcesses = undefined;
         Config.documentTypes = undefined;
+        Config.complexProcesses = undefined;
     }
 
     function resolveError() {
@@ -50,6 +53,15 @@ app.factory("configService", function () {
         Config.errorMessage = undefined;
     }
 
+    function retrieveComplexProcesses(){
+        Config.complexProcesses = [];
+        Config.complexProcesses.push({processName: ""});
+        for(n = 0; n<Config.processes.length;n++){
+            if(Config.processes[n].type == "ComplexProcess"){
+                Config.complexProcesses.push(Config.processes[i]);
+            }
+        }
+    }
 
     function restructureProcesses() {
 

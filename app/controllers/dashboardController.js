@@ -55,6 +55,8 @@ app.controller("dashboardController", function ($scope, configService, dashboard
                     configService.restructureProcesses();
                     $scope.structuredProcesses = configService.getConfig().structuredProcesses;
                     $scope.processes = configService.getConfig().processes;
+                    configService.retrieveComplexProcesses();
+                    $scope.complexProcesses = configService.getConfig().complexProcesses;
                 } else {
                     //to do
                 }

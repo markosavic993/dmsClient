@@ -4,6 +4,9 @@
         <ul class="list-group" ng-if="process.childProcesses">
             <li class="list-group-item" ng-repeat="process in process.childProcesses track by $index"
                 ng-include="'process_renderer.html'">
+                <ul ng-if="process.activities">
+                    <li class="list-group-item" ng-repeat="activity in proces.activities track by $index"></li>
+                </ul>
             </li>
         </ul>
     </script>

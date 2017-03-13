@@ -3,13 +3,14 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("registrationFormController", function (configService,registrationService, $scope, $location, cssInjector) {
+app.controller("registrationFormController", function (configService,registrationService, dashboardService, $scope, $location, cssInjector) {
     var vm = this;
     cssInjector.add("../css/style.css");
 
     $scope.configService = configService;
 
     vm.handleLoginRequest = function (loginInfo) {
+
         if(loginInfo != undefined && loginInfo.username != undefined && loginInfo.password != undefined) {
             registrationService.login(loginInfo);
         }
