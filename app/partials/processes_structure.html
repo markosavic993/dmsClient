@@ -5,9 +5,12 @@
             <li class="list-group-item" ng-repeat="process in process.childProcesses track by $index"
                 ng-include="'process_renderer.html'">
                 <ul ng-if="process.activities">
-                    <li class="list-group-item" ng-repeat="activity in proces.activities track by $index"></li>
+                    <li class="list-group-item" ng-repeat="activity in process.activities track by $index"></li>
                 </ul>
             </li>
+        </ul>
+        <ul ng-if="process.activities">
+            <li class="list-group-item" ng-repeat="activity in process.activities track by $index">{{activity.activityName}}</li>
         </ul>
     </script>
     <div class="col-md-8">
@@ -16,9 +19,9 @@
                 ng-include="'process_renderer.html'"></li>
         </ul>
             <button type="button" class="btn btn-primary" ng-click="openAddProcessModal()" data-toggle="modal" data-target="#modal">Add process</button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal">Delete process</button>
+            <button type="button" class="btn btn-danger" ng-click="openDeleteProcessModal()" data-toggle="modal" data-target="#modal">Delete process</button>
             <button type="button" class="btn btn-primary" ng-click="openAddActivityModal()" data-toggle="modal" data-target="#modal">Add activity</button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal">Delete activity</button>
+            <button type="button" class="btn btn-danger" ng-click="openDeleteActivityModal()"data-toggle="modal" data-target="#modal">Delete activity</button>
     </div>
     <div ng-include="'../partials/abstract_modal.html'"></div>
 </div>

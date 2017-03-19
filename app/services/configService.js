@@ -19,7 +19,9 @@ app.factory("configService", function () {
         structuredProcesses: undefined,
         allocatedProcesses: undefined,
         documentTypes: undefined,
-        complexProcesses: undefined
+        complexProcesses: undefined,
+        primitiveProcesses: undefined,
+        activities: undefined
     }
 
     return {
@@ -27,7 +29,9 @@ app.factory("configService", function () {
         resolveUser: resolveUser,
         resolveError: resolveError,
         restructureProcesses: restructureProcesses,
-        retrieveComplexProcesses: retrieveComplexProcesses
+        retrieveComplexProcesses: retrieveComplexProcesses,
+        retrievePrimitiveProcesses: retrievePrimitiveProcesses,
+        retrieveActivities: retrieveActivities
     };
 
     function getConfig() {
@@ -46,11 +50,23 @@ app.factory("configService", function () {
         Config.allocatedProcesses = undefined;
         Config.documentTypes = undefined;
         Config.complexProcesses = undefined;
+        Config.primitiveProcesses = undefined;
+        Config.activities = undefined;
     }
 
     function resolveError() {
         Config.error = false;
         Config.errorMessage = undefined;
+    }
+
+    function retrieveActivities() {
+        Config.activities = [];
+        for(r = 0; r<Config.processes.length;r++){
+            if(Config.processes[r].activities != null && Config.processes[r].activities.length > 0 ){
+                for(v = 0; v<Config.processes[r].activities.length;v++)
+                Config.activities.push(Config.processes[r].activities[v]);
+            }
+        }
     }
 
     function retrieveComplexProcesses(){
@@ -59,6 +75,15 @@ app.factory("configService", function () {
         for(n = 0; n<Config.processes.length;n++){
             if(Config.processes[n].type == "ComplexProcess"){
                 Config.complexProcesses.push(Config.processes[i]);
+            }
+        }
+    }
+
+    function retrievePrimitiveProcesses(){
+        Config.primitiveProcesses = [];
+        for(s = 0; s<Config.processes.length;s++){
+            if(Config.processes[s].type == "PrimitiveProcess"){
+                Config.primitiveProcesses.push(Config.processes[s]);
             }
         }
     }

@@ -1,19 +1,19 @@
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Title</h4>
+        <h4 class="modal-title">Delete process</h4>
     </div>
     <div class="modal-body">
 
         <div class="form-group">
             <label for="parent">Select process to delete:</label>
-            <select class="form-control" id="parent" ng-init="process.parentProcess = processes[0]" ng-options="process.processName for process in processes"
+            <select class="form-control" id="parent" ng-init="process = processes[0]" ng-options="process.processName for process in processes"
                     ng-model="process" />
         </div>
 
     </div>
     <div class="modal-footer">
-        <button ng-click="delteProcess(process)" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+        <button ng-click="deleteProcess(process)" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     </div>
 </div>

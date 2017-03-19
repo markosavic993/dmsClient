@@ -4,9 +4,28 @@
     <h4 class="modal-title">Title</h4>
 </div>
 <div class="modal-body">
-
+    <div class="form-group">
+        <label for="name">Enter activity name:</label>
+        <input type="text" class="form-control" ng-model="activity.activityName" id="name">
+    </div>
+    <div class="form-group">
+        <label for="input">Select input document:</label>
+        <select class="form-control" id="input" ng-init="activity.inputDocument = documents[0]" ng-options="document.name for document in documents"
+                ng-model="activity.inputDocument" />
+    </div>
+    <div class="form-group">
+        <label for="output">Select output document:</label>
+        <select class="form-control" id="output" ng-init="activity.outputDocument = documents[0]" ng-options="document.name for document in documents"
+                ng-model="activity.outputDocument" />
+    </div>
+    <div class="form-group">
+        <label for="process">Select process:</label>
+        <select class="form-control" id="process" ng-init="activity.process = primitiveProcesses[0]" ng-options="process.processName for process in primitiveProcesses"
+                ng-model="activity.process" />
+    </div>
 </div>
 <div class="modal-footer">
-    <button ng-click="addProcess(process)" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button ng-click="addActivity(activity)" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 </div>

@@ -40,10 +40,7 @@ app.controller("dashboardController", function ($scope, configService, dashboard
         }
     }
 
-    $scope.showActivitiesTab = function () {
-        for(i=0;i<configService.getConfig().structuredProcesses;i++){
-            console.log(configService.getConfig().structuredProcesses[i]);
-        }
+    $scope.showActivitiesTab = function (){
         $scope.template = $scope.templates[0];
     }
 
@@ -57,6 +54,8 @@ app.controller("dashboardController", function ($scope, configService, dashboard
                     $scope.processes = configService.getConfig().processes;
                     configService.retrieveComplexProcesses();
                     $scope.complexProcesses = configService.getConfig().complexProcesses;
+                    configService.retrievePrimitiveProcesses();
+                    $scope.primitiveProcesses = configService.getConfig().primitiveProcesses;
                 } else {
                     //to do
                 }

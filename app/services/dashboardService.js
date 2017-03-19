@@ -12,6 +12,9 @@ app.factory("dashboardService", function ($http,configService, $location) {
         loadProcesses: function(){
             return $http.get("http://localhost:8080/dms/process/"+configService.getConfig().company.vat);
 
+        },
+        loadDocuments: function(){
+            return $http.get("http://localhost:8080/dms/document/"+configService.getConfig().company.vat);
         }
     }
 });
