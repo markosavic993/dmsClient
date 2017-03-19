@@ -1,6 +1,17 @@
 <div class="col-md-8">
     <h1 class="page-header">Activities</h1>
 
-    This is activities tab.
+    <table>
+        <thead>
+        <tr>
+            <th>Activity</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="activity in activities">
+        <tr>
+            <td><strong>{{activity.activityName}}</strong></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>

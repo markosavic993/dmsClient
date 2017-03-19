@@ -19,10 +19,30 @@ app.controller("dashboardController", function ($scope, configService, dashboard
         { name: 'processes_structure', url: '../partials/processes_structure.html'},
         { name: "documentTypes", url: '../partials/documentTypes.html'},
         { name: 'help', url: '../partials/help.html'},
-        { name: 'profile', url: '../partials/profile.html'}
+        { name: 'profile', url: '../partials/profile.html'},
+        { name: 'dashboard', url: '../partials/start_page.html'}
     ];
 
-    $scope.template = $scope.templates[0];
+    $scope.template = $scope.templates[7];
+
+    $scope.showActivitiesTab = function() {
+        if (configService.getConfig().activities == undefined){
+            dashboardService.loadProcesses().then(function (response) {
+                if (response != null) {
+                    configService.getConfig().processes = response.data;
+                    $scope.processes = response.data;
+                    configService.retrieveActivities()
+                    $scope.activities = configService.getConfig().activities;
+                    $scope.template = $scope.templates[0];
+                } else {
+                    //to do
+                }
+            });
+    } else {
+        $scope.activities = configService.getConfig().activities;
+        $scope.template = $scope.templates[0];
+    }
+    }
 
     $scope.showProcessesTab = function(){
         if(configService.getConfig().processes == undefined) {
@@ -38,10 +58,6 @@ app.controller("dashboardController", function ($scope, configService, dashboard
         } else {
             $scope.template = $scope.templates[1];
         }
-    }
-
-    $scope.showActivitiesTab = function (){
-        $scope.template = $scope.templates[0];
     }
 
     $scope.showProcessesStructure = function(){
