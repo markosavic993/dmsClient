@@ -5,11 +5,15 @@
         <thead>
         <tr>
             <th>Activity</th>
+            <th>Input Document</th>
+            <th>Output Document</th>
         </tr>
         </thead>
         <tbody ng-repeat="activity in activities">
         <tr>
             <td><strong>{{activity.activityName}}</strong></td>
+            <td><strong>{{activity.inputDocumentType.typeName}} </strong><button class="btn-lg" style="float: right"><span class="glyphicon glyphicon-download" style="color:green" /></button></td>
+            <td><strong>{{activity.outputDocumentType.typeName}} </strong><button class="btn-lg" style="float: right"><span class="glyphicon glyphicon-upload" style="color:blue" /></button></td>
         </tr>
         </tbody>
     </table>

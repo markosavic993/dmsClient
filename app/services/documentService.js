@@ -6,13 +6,7 @@ var app = angular.module("dmsApp");
 app.factory("documentService", function ($http, configService) {
     return {
         getTypesForCompany: function (vat) {
-            return $http.get("http://localhost:8080/document/getDocumentTypes/" + vat)
-                .then(function (response) {
-                    configService.getConfig().documentTypes = response.data;
-                },
-                function (error) {
-                    //TODO handle error response
-                })
+            return $http.get("http://localhost:8080/document/getDocumentTypes/" + vat);
         }
     }
 });

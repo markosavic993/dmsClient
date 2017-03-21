@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller('processesStructureController', function ($scope, configService, activityService, processService, dashboardService) {
+app.controller('processesStructureController', function ($scope, configService, activityService, processService, dashboardService, documentService) {
 
     $scope.activity = {inputDocument:null,outputDocument: null,process:null};
     $scope.process = {parentProcess: {processName: ""}}
@@ -23,7 +23,7 @@ app.controller('processesStructureController', function ($scope, configService, 
     $scope.modalTemplate = $scope.modalTemplates[0];
 
     $scope.openAddActivityModal = function () {
-        dashboardService.loadDocuments().then(function(response){
+        documentService.getTypesForCompany(configService.getConfig().company.vat).then(function (response) {
             $scope.documents = response.data;
             $scope.activity.inputDocument = $scope.documents[0];
             $scope.activity.outputDocument = $scope.documents[0];
@@ -47,10 +47,10 @@ app.controller('processesStructureController', function ($scope, configService, 
 
     $scope.addProcess = function (process, processType) {
 
-        if(process.parentProcess.processName == ""){
+        if(process.parentProcess == undefined || process.parentProcess.processName == ""){
             process.parentProcess = null;
         }
-        if (processType == "primitive") {
+        if (processType.typeName == "Primitive") {
             process.type = "PrimitiveProcess";
             processService.addPrimitiveProcess(process).then(function () {
                 reloadProcesses();

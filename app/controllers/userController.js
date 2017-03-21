@@ -68,13 +68,17 @@ app.controller('userController', function (userService, configService, modalVali
         return /\d/.test(t);
     }
 
-    vm.changePassword = function (password) {
-        if(password == undefined || password.length < 6 || !hasNumbers(password)) {
+    vm.changePassword = function (newPassword, confirmPassword) {
+        if(newPassword != confirmPassword) {
+            toastr.error("Passwords doesn't match!");
+            return;
+        }
+        if(newPassword == undefined || newPassword.length < 6 || !hasNumbers(newPassword)) {
             toastr.error("Password must contain at least six characters including min one numeric value!");
             return;
         }
         var user = configService.getConfig().user;
-        user.password = password;
+        user.password = newPassword;
         userService.changeUserPassword(user)
             .then(function (response) {
                 toastr.success("Password successfully changed!", "Success");

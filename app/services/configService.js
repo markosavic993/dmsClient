@@ -71,10 +71,9 @@ app.factory("configService", function () {
 
     function retrieveComplexProcesses(){
         Config.complexProcesses = [];
-        Config.complexProcesses.push({processName: ""});
         for(n = 0; n<Config.processes.length;n++){
             if(Config.processes[n].type == "ComplexProcess"){
-                Config.complexProcesses.push(Config.processes[i]);
+                Config.complexProcesses.push(Config.processes[n]);
             }
         }
     }

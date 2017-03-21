@@ -10,12 +10,12 @@
     </div>
     <div class="form-group">
         <label for="input">Select input document:</label>
-        <select class="form-control" id="input" ng-init="activity.inputDocument = documents[0]" ng-options="document.name for document in documents"
+        <select class="form-control" id="input" ng-init="activity.inputDocument = documents[0]" ng-options="document.typeName for document in documents"
                 ng-model="activity.inputDocument" />
     </div>
     <div class="form-group">
         <label for="output">Select output document:</label>
-        <select class="form-control" id="output" ng-init="activity.outputDocument = documents[0]" ng-options="document.name for document in documents"
+        <select class="form-control" id="output" ng-init="activity.outputDocument = documents[0]" ng-options="document.typeName for document in documents"
                 ng-model="activity.outputDocument" />
     </div>
     <div class="form-group">

@@ -25,19 +25,20 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input class="form-control " type="password" id="currentPassword"
-                                       placeholder="Enter current password">
+                                <input class="form-control " type="password" id="password"
+                                       placeholder="Enter new password"
+                                        ng-model="pass">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <input class="form-control " type="password" id="newPassword"
-                                       placeholder="Enter new password"
+                                       placeholder="Confirm new password"
                                         ng-model="password">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button data-dismiss="modal" ng-click="ctrl.changePassword(password)" type="submit" class="btn btn-primary btn-lg"
+                            <button data-dismiss="modal" ng-click="ctrl.changePassword(pass, password)" type="submit" class="btn btn-primary btn-lg"
                                     style="width: 100%;">
                                 <span class="glyphicon glyphicon-ok-sign"></span> Change password
                             </button>
