@@ -6,7 +6,7 @@ var app = angular.module("dmsApp");
 app.factory("registrationService", function ($http, configService, $location, userService) {
     return {
         login: function (loginInfo) {
-            $http.post("http://localhost:8080/dms/user/login", loginInfo).then(function (response) {
+            $http.post("http://localhost:8080/user/login", loginInfo).then(function (response) {
                 if (response.data != "") {
                     configService.getConfig().user = response.data;
                     configService.getConfig().company = response.data.company;
@@ -21,7 +21,7 @@ app.factory("registrationService", function ($http, configService, $location, us
             });
         },
         signup: function (signupInfo) {
-            $http.post("http://localhost:8080/dms/user/signup", signupInfo).then(function (response) {
+            $http.post("http://localhost:8080/user/signup", signupInfo).then(function (response) {
                 if (response.data != "") {
                     configService.getConfig().user = response.data;
                     configService.getConfig().successfullySignedUp=true;
@@ -36,7 +36,7 @@ app.factory("registrationService", function ($http, configService, $location, us
         },
         registerCompany: function (companyInfo) {
             companyInfo.user = configService.getConfig().user;
-            $http.post("http://localhost:8080/dms/company/register", companyInfo).then(function(response){
+            $http.post("http://localhost:8080/company/register", companyInfo).then(function(response){
                 if(response.data != ""){
                     configService.getConfig().company = response.data;
                     configService.getConfig().user.company = response.data;

@@ -10,11 +10,11 @@ app.factory("dashboardService", function ($http,configService, $location) {
             $location.path('/');
         },
         loadProcesses: function(){
-            return $http.get("http://localhost:8080/dms/process/"+configService.getConfig().company.vat);
+            return $http.get("http://localhost:8080/process/"+configService.getConfig().company.vat);
 
         },
         loadDocuments: function(){
-            return $http.get("http://localhost:8080/dms/document/"+configService.getConfig().company.vat);
+            return $http.get("http://localhost:8080/document/"+configService.getConfig().company.vat);
         }
     }
 });

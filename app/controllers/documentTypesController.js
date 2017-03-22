@@ -21,7 +21,12 @@ app.controller('documentTypesController', ['$scope', 'fileUploadService', 'confi
 
     $scope.getDocumentTypesForCompany = function(){
         var vat = configService.getConfig().company.vat;
-        documentService.getTypesForCompany(vat);
+        documentService.getTypesForCompany(vat).then(function (response) {
+                configService.getConfig().documentTypes = response.data;
+            },
+            function (error) {
+                //TODO handle error response
+            });
     }
 
 }]);
