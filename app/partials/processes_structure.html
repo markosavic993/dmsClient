@@ -1,16 +1,24 @@
 <div ng-controller="processesStructureController as ctrl">
     <script type="text/ng-template" id="process_renderer.html">
         {{process.processName}}
+        <span ng-if="process.type == 'ComplexProcess'">
+            <button type="button" class="btn btn-primary btn-sm" ng-click="openAddProcessModal(process)" data-toggle="modal" data-target="#modal">Add process</button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProcess(process)" data-toggle="modal" data-target="#modal">Delete process</button>
+        </span>
+        <span ng-if="process.type == 'PrimitiveProcess'">
+            <button type="button" class="btn btn-primary btn-sm" ng-click="openAddActivityModal(process)" data-toggle="modal" data-target="#modal">Add activity</button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProcess(process)" data-toggle="modal" data-target="#modal">Delete process</button>
+        </span>
         <ul class="list-group" ng-if="process.childProcesses">
             <li class="list-group-item" ng-repeat="process in process.childProcesses track by $index"
                 ng-include="'process_renderer.html'">
-                <ul ng-if="process.activities">
-                    <li class="list-group-item" ng-repeat="activity in process.activities track by $index"></li>
-                </ul>
             </li>
         </ul>
         <ul ng-if="process.activities">
-            <li class="list-group-item" ng-repeat="activity in process.activities track by $index">{{activity.activityName}}</li>
+            <li class="list-group-item" ng-repeat="activity in process.activities track by $index">
+                {{activity.activityName}}
+                <button type="button" class="btn btn-danger btn-sm" ng-click="deleteActivity(activity)"data-toggle="modal" data-target="#modal">Delete activity</button>
+            </li>
         </ul>
     </script>
     <div class="col-md-8">
@@ -18,10 +26,7 @@
             <li class="list-group-item" ng-repeat="process in structuredProcesses track by $index"
                 ng-include="'process_renderer.html'"></li>
         </ul>
-            <button type="button" class="btn btn-primary" ng-click="openAddProcessModal()" data-toggle="modal" data-target="#modal">Add process</button>
-            <button type="button" class="btn btn-danger" ng-click="openDeleteProcessModal()" data-toggle="modal" data-target="#modal">Delete process</button>
-            <button type="button" class="btn btn-primary" ng-click="openAddActivityModal()" data-toggle="modal" data-target="#modal">Add activity</button>
-            <button type="button" class="btn btn-danger" ng-click="openDeleteActivityModal()"data-toggle="modal" data-target="#modal">Delete activity</button>
+            <button type="button" class="btn btn-primary" ng-click="openAddProcessModal(null)" data-toggle="modal" data-target="#modal">Add process</button>
     </div>
     <div ng-include="'../partials/abstract_modal.html'"></div>
 </div>

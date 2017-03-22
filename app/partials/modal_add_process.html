@@ -11,17 +11,12 @@
                     ng-model="processType" />
         </div>
         <div class="form-group">
-            <label for="parent">Select parent process (optional):</label>
-            <select class="form-control" id="parent" ng-init="process.parentProcess = complexProcesses[0]" ng-options="process.processName for process in complexProcesses"
-                    ng-model="process.parentProcess" />
-        </div>
-        <div class="form-group">
             <label for="name">Enter process name:</label>
-            <input type="text" class="form-control" ng-model="process.processName" id="name">
+            <input type="text" class="form-control" ng-model="newProcess.processName" id="name">
         </div>
     </div>
     <div class="modal-footer">
-        <button ng-click="addProcess(process, processType)" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+        <button ng-click="addProcess(newProcess, processType)" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     </div>
 </div>
