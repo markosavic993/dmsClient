@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller('processesStructureController', function ($scope, configService, activityService, processService, dashboardService, documentService) {
+app.controller('processesStructureController', function ($scope, configService, activityService, processService, dashboardService, documentService, toastr) {
 
     $scope.activity = {inputDocument:null,outputDocument: null,process:null};
     $scope.process = {parentProcess: {processName: ""}}
@@ -45,25 +45,64 @@ app.controller('processesStructureController', function ($scope, configService, 
         $scope.modalTemplate = $scope.modalTemplates[3];
     }
 
+    function doesAlreadyExist(process) {
+        for(p in configService.getConfig().processes) {
+            if(configService.getConfig().processes[p].processName == process.processName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     $scope.addProcess = function (process, processType) {
+
+        if(process.processName == undefined || process.processName == "") {
+            toastr.error("Process name must be provided!", "Failure!");
+            return;
+        }
 
         if(process.parentProcess == undefined || process.parentProcess.processName == ""){
             process.parentProcess = null;
         }
+        if(doesAlreadyExist(process)) {
+           toastr.error("Process already exists.", "Failure!");
+            return;
+        }
         if (processType.typeName == "Primitive") {
             process.type = "PrimitiveProcess";
             processService.addPrimitiveProcess(process).then(function () {
+                toastr.success("Primitive process successfully created!")
                 reloadProcesses();
             });
         } else {
             process.type = "ComplexProcess";
             processService.addComplexProcess(process).then(function () {
+                toastr.success("Complex process successfully created!")
                 reloadProcesses();
             });
         }
     }
 
+    function activityAlreadyExist(activity) {
+        for(a in configService.getConfig().activities) {
+            if(activity.activityName == configService.getConfig().activities[a].activityName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     $scope.addActivity = function(activity){
+        if(activity.activityName == undefined || activity.activityName == "") {
+            toastr.error("Activity name must be provided.","Failure!");
+            return;
+        }
+        if(activityAlreadyExist(activity)) {
+            toastr.error("Activity already exists!", "Failure!");
+            return;
+        }
         activityService.addActivity(activity).then(function(){
             reloadProcesses();
         })
