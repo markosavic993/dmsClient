@@ -3,11 +3,11 @@
         {{process.processName}}
         <span ng-if="process.type == 'ComplexProcess'">
             <button type="button" class="btn btn-primary btn-sm" ng-click="openAddProcessModal(process)" data-toggle="modal" data-target="#modal">Add process</button>
-            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProcess(process)" data-toggle="modal" data-target="#modal">Delete process</button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProcess(process)">Delete process</button>
         </span>
         <span ng-if="process.type == 'PrimitiveProcess'">
             <button type="button" class="btn btn-primary btn-sm" ng-click="openAddActivityModal(process)" data-toggle="modal" data-target="#modal">Add activity</button>
-            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProcess(process)" data-toggle="modal" data-target="#modal">Delete process</button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProcess(process)">Delete process</button>
         </span>
         <ul class="list-group" ng-if="process.childProcesses">
             <li class="list-group-item" ng-repeat="process in process.childProcesses track by $index"
@@ -17,7 +17,7 @@
         <ul ng-if="process.activities">
             <li class="list-group-item" ng-repeat="activity in process.activities track by $index">
                 {{activity.activityName}}
-                <button type="button" class="btn btn-danger btn-sm" ng-click="deleteActivity(activity)"data-toggle="modal" data-target="#modal">Delete activity</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="deleteActivity(activity)">Delete activity</button>
             </li>
         </ul>
     </script>

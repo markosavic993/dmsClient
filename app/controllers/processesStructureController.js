@@ -19,7 +19,7 @@ app.controller('processesStructureController', function ($scope, configService, 
 
     $scope.modalTemplate = $scope.modalTemplates[0];
 
-    $scope.openAddActivityModal = function () {
+    $scope.openAddActivityModal = function (process) {
         documentService.getTypesForCompany(configService.getConfig().company.vat).then(function (response) {
             $scope.documents = response.data;
             $scope.activity.inputDocument = $scope.documents[0];
@@ -34,15 +34,6 @@ app.controller('processesStructureController', function ($scope, configService, 
         $scope.modalTemplate = $scope.modalTemplates[1];
     }
 
-    $scope.openDeleteProcessModal = function () {
-        $scope.modalTemplate = $scope.modalTemplates[2];
-    }
-
-    $scope.openDeleteActivityModal = function () {
-        configService.retrieveActivities();
-        $scope.activities = configService.getConfig().activities;
-        $scope.modalTemplate = $scope.modalTemplates[3];
-    }
 
     function doesAlreadyExist(process) {
         for(p in configService.getConfig().processes) {
@@ -58,7 +49,7 @@ app.controller('processesStructureController', function ($scope, configService, 
 
         process.parentProcess = $scope.parentProcess;
 
-        if (processType == "primitive") {
+
         if(process.processName == undefined || process.processName == "") {
             toastr.error("Process name must be provided!", "Failure!");
             return;
@@ -87,6 +78,8 @@ app.controller('processesStructureController', function ($scope, configService, 
     }
 
     function activityAlreadyExist(activity) {
+
+        configService.retrieveActivities();
         for(a in configService.getConfig().activities) {
             if(activity.activityName == configService.getConfig().activities[a].activityName) {
                 return true;
