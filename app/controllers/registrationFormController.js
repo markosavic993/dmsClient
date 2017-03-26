@@ -9,7 +9,9 @@ app.controller("registrationFormController", function (configService,registratio
 
     $scope.configService = configService;
 
+
     vm.handleLoginRequest = function (loginInfo) {
+        configService.readHost();
 
         if(loginInfo != undefined && loginInfo.username != undefined && loginInfo.password != undefined) {
             registrationService.login(loginInfo);
@@ -17,6 +19,8 @@ app.controller("registrationFormController", function (configService,registratio
     }
 
     vm.handleSignupRequest = function (signupInfo) {
+        configService.readHost();
+
         if(signupInfo != undefined && signupInfo.firstName != undefined && signupInfo.lastName != undefined && signupInfo.username != undefined && signupInfo.password != undefined) {
             registrationService.signup(signupInfo);
         }

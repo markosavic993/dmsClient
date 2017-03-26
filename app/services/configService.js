@@ -6,7 +6,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.factory("configService", function () {
+app.factory("configService", function ($http) {
 
     var Config = {
         user: undefined,
@@ -21,7 +21,8 @@ app.factory("configService", function () {
         documentTypes: undefined,
         complexProcesses: undefined,
         primitiveProcesses: undefined,
-        activities: undefined
+        activities: undefined,
+        host: undefined
     }
 
     return {
@@ -31,13 +32,20 @@ app.factory("configService", function () {
         restructureProcesses: restructureProcesses,
         retrieveComplexProcesses: retrieveComplexProcesses,
         retrievePrimitiveProcesses: retrievePrimitiveProcesses,
-        retrieveActivities: retrieveActivities
+        retrieveActivities: retrieveActivities,
+        readHost: readHost
     };
 
     function getConfig() {
         return Config;
     }
 
+    function readHost(){
+        $http.get('application.properties').then(function (response) {
+            Config.host = response.data.host;
+        });
+
+    }
     function resolveUser() {
         Config.user = undefined;
         Config.company = undefined;
@@ -52,6 +60,7 @@ app.factory("configService", function () {
         Config.complexProcesses = undefined;
         Config.primitiveProcesses = undefined;
         Config.activities = undefined;
+        Config.host = undefined;
     }
 
     function resolveError() {

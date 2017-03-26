@@ -7,14 +7,14 @@ app.factory("processService", function ($http, configService) {
     return {
         addComplexProcess: function(process){
             process.company = configService.getConfig().company;
-            return $http.post("http://localhost:8080/process/complex/add",process);
+            return $http.post(configService.getConfig().host+"/process/complex/add",process);
         },
         addPrimitiveProcess: function(process){
             process.company = configService.getConfig().company;
-            return $http.post("http://localhost:8080/process/primitive/add",process);
+            return $http.post(configService.getConfig().host+"/process/primitive/add",process);
         },
         deleteProcess: function(process){
-            return $http.post("http://localhost:8080/process/delete/",process);
+            return $http.post(configService.getConfig().host+"/process/delete/",process);
         }
     }
 });
