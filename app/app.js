@@ -5,7 +5,8 @@
 
 var app = angular.module("dmsApp", ["ngRoute", "angular.css.injector","ui.tree", "toastr"]);
 
-app.config(function ($routeProvider, cssInjectorProvider) {
+app.config(function ($routeProvider, cssInjectorProvider, $compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
 
     cssInjectorProvider.setSinglePageMode(true);
 

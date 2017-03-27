@@ -6,13 +6,13 @@ app.service('fileUploadService', ['$http', 'toastr', 'configService', function (
     this.uploadFileToUrl = function(file, documentTypeData){
         var fd = new FormData();
         fd.append('file', file);
-        $http.post(configService.getConfig()+"/document/fileUpload/" + configService.getConfig().company.vat, fd, {
+        $http.post("http://localhost:8080/document/fileUpload/" + configService.getConfig().company.vat, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
             .success(function(responseDocumentType){
                 documentTypeData.originalFilename = file.name;
-                $http.post(configService.getConfig().host+"/document/filedata", documentTypeData)
+                $http.post("http://localhost:8080/document/filedata", documentTypeData)
                     .success(function (response) {
                         toastr.success("Document type successfully uploaded!");
                     })

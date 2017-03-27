@@ -6,19 +6,19 @@ var app = angular.module("dmsApp");
 app.factory("userService", function ($http, configService, $q) {
     return {
         loadUsers: function (vat) {
-            return $http.get(configService.getConfig().host+"/user/loadusers/" + vat);
+            return $http.get("http://localhost:8080/user/loadusers/" + vat);
         },
         updateUser: function (user) {
-            return $http.post(configService.getConfig().host+"/user/update", user);
+            return $http.post("http://localhost:8080/user/update", user);
         },
         deleteUser: function (user) {
-            return $http.post(configService.getConfig().host+"/user/delete", user);
+            return $http.post("http://localhost:8080/user/delete", user);
         },
         addEmployee: function (employee) {
-            return $http.post(configService.getConfig().host+"/user/addEmployee", employee);
+            return $http.post("http://localhost:8080/user/addEmployee", employee);
         },
         changeUserPassword: function (user) {
-            return $http.post(configService.getConfig().host+"/user/changePassword", user);
+            return $http.post("http://localhost:8080/user/changePassword", user);
         }
     }
 });

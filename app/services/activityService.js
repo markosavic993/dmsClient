@@ -6,10 +6,10 @@ var app = angular.module("dmsApp");
 app.factory("activityService", function ($http, configService) {
     return {
         addActivity: function(activity){
-            return $http.post(configService.getConfig().host+"/activity/add",activity);
+            return $http.post("http://localhost:8080/activity/add",activity);
         },
         deleteActivity: function(activity){
-            return $http.post(configService.getConfig().host+"/activity/delete",activity);
+            return $http.post("http://localhost:8080/activity/delete",activity);
         }
     }
 });

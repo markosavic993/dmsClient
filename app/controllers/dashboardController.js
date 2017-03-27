@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("dashboardController", function ($scope, configService, dashboardService, $location, cssInjector) {
+app.controller("dashboardController", function ($scope, $window, configService, dashboardService, $location, cssInjector, fileDownloadService) {
     var vm = this;
 
     cssInjector.add("../css/dashboard.css");
@@ -26,7 +26,7 @@ app.controller("dashboardController", function ($scope, configService, dashboard
     $scope.template = $scope.templates[7];
 
     $scope.showActivitiesTab = function() {
-        if (configService.getConfig().activities == undefined){
+        if (configService.getConfig().activities == undefined || configService.getConfig().activities.length == 0){
             dashboardService.loadProcesses().then(function (response) {
                 if (response != null) {
                     configService.getConfig().processes = response.data;
@@ -102,5 +102,27 @@ app.controller("dashboardController", function ($scope, configService, dashboard
 
     $scope.logOut = function(){
         dashboardService.logOut();
+    }
+
+
+    $scope.downloadDocument = function (activity) {
+        fileDownloadService.downloadFile(activity).success(function (response) {
+                var blob = new Blob([response], { type: 'application/pdf' }),
+                url = $window.URL;
+
+            console.log("url " + url);
+            $scope.fileUrl = url.createObjectURL(blob);
+        });
+    }
+
+    $scope.isFileSelected = false;
+    
+    $scope.setFileSelected = function () {
+        $scope.isFileSelected = true;
+    }
+
+    $scope.uploadDocument = function () {
+        var file = $scope.myFile;
+        console.log(file);
     }
 });
