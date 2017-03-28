@@ -3,7 +3,7 @@
  */
 var app = angular.module("dmsApp");
 
-app.controller("dashboardController", function ($scope, $window, configService, dashboardService, $location, cssInjector, fileDownloadService) {
+app.controller("dashboardController", function ($scope, $sce, $window, configService, dashboardService, $location, cssInjector, fileUploadService, fileDownloadService) {
     var vm = this;
 
     cssInjector.add("../css/dashboard.css");
@@ -110,8 +110,11 @@ app.controller("dashboardController", function ($scope, $window, configService, 
                 var blob = new Blob([response], { type: 'application/pdf' }),
                 url = $window.URL;
 
+            console.log(response.url);
             console.log("url " + url);
             $scope.fileUrl = url.createObjectURL(blob);
+            var pdfFile = $sce.trustAsResourceUrl($scope.fileURL);
+            $window.open(pdfFile, "_blank");
         });
     }
 
@@ -121,8 +124,10 @@ app.controller("dashboardController", function ($scope, $window, configService, 
         $scope.isFileSelected = true;
     }
 
-    $scope.uploadDocument = function () {
+    $scope.uploadDocument = function (activity) {
         var file = $scope.myFile;
         console.log(file);
+        fileUploadService.uploadDocument(file, activity);
+        $scope.isFileSelected = false;
     }
 });

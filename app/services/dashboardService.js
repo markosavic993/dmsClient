@@ -10,7 +10,7 @@ app.factory("dashboardService", function ($http,configService, $location) {
             $location.path('/');
         },
         loadProcesses: function(){
-            return $http.get("http://localhost:8080/process/"+configService.getConfig().company.vat);
+            return $http.get(configService.getConfig().host+"/process/"+configService.getConfig().company.vat);
 
         },
         loadDocuments: function(){

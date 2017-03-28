@@ -9,18 +9,22 @@
             <th>Output Document</th>
         </tr>
         </thead>
-        <tbody ng-repeat="activity in activities">
+        <tbody ng-controller="dashboardController" ng-repeat="activity in activities">
         <tr>
             <td><strong>{{activity.activityName}}</strong></td>
             <td><strong>{{activity.inputDocumentType.typeName}} </strong>
-                <a ng-href="{{ fileUrl }}" type="application/pdf" download="document.pdf" ng-click="downloadDocument(activity)" class="btn-lg" style="float: right"><span class="glyphicon glyphicon-download"
-                                                                  style="color:green"/></a>
+                <a ng-href="{{ fileUrl }}" type="application/pdf" download="document.pdf"
+                   ng-click="downloadDocument(activity)" class="btn-lg" style="float: right"><span
+                        class="glyphicon glyphicon-download"
+                        style="color:green"/></a>
             </td>
             <td><strong>{{activity.outputDocumentType.typeName}} </strong>
                 <label for="uploadDocument" style="float: right">
                     <!--<span ng-click="setFileSelected()" class="btn btn-lg glyphicon glyphicon-upload" style="color:blue" aria-hidden="true"></span>-->
-                    <input ng-click="setFileSelected()" class="btn btn-primary" id="uploadDocument" file-model="myFile" type="file"/>
-                    <a style= "align-self: center" ng-click="uploadDocument()" ng-show="isFileSelected"><span class="btn btn-lg glyphicon glyphicon-upload" style="color:blue"></span></a>
+                    <input ng-hide="isFileSelected" ng-click="setFileSelected()" class="input-file btn btn-primary" id="uploadDocument" file-model="myFile"
+                           type="file"/>
+                    <a style="align-self: center" ng-click="uploadDocument(activity)" ng-show="isFileSelected"><span
+                            class="btn btn-lg glyphicon glyphicon-upload" style="color:blue"></span></a>
                 </label>
             </td>
         </tr>
