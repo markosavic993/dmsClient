@@ -13,7 +13,7 @@
         <tr>
             <td><strong>{{activity.activityName}}</strong></td>
             <td><strong>{{activity.inputDocumentType.typeName}} </strong>
-                <a ng-href="{{ fileUrl }}" type="application/pdf" download="document.pdf"
+                <a ng-href="{{ fileUrl }}" download="{{activity.inputDocumentType.typeName}}"
                    ng-click="downloadDocument(activity)" class="btn-lg" style="float: right"><span
                         class="glyphicon glyphicon-download"
                         style="color:green"/></a>

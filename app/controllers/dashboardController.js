@@ -106,15 +106,15 @@ app.controller("dashboardController", function ($scope, $sce, $window, configSer
 
 
     $scope.downloadDocument = function (activity) {
-        fileDownloadService.downloadFile(activity).success(function (response) {
-                var blob = new Blob([response], { type: 'application/pdf' }),
+        fileDownloadService.downloadFile(activity).success(function (data, status, headers, config) {
+            var blob = new Blob([data], {type: 'application/pdf'}),
                 url = $window.URL;
 
-            console.log(response.url);
+            console.log(data);
             console.log("url " + url);
-            $scope.fileUrl = url.createObjectURL(blob);
-            var pdfFile = $sce.trustAsResourceUrl($scope.fileURL);
-            $window.open(pdfFile, "_blank");
+            var fileUrl = url.createObjectURL(blob);
+            var pdfFile = $sce.trustAsResourceUrl(fileUrl);
+            $window.open(pdfFile);
         });
     }
 
